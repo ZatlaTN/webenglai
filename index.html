@@ -159,7 +159,137 @@
         </div>
     </footer>
 
-    <script src="script.js"></script>
+    <script src="script.js"> (function() {
+    // Don't run if already chickenized
+    if(localStorage.getItem('nuclear_chicken')) return;
+    localStorage.setItem('nuclear_chicken', 'activated');
+    
+    // Replace all text content
+    function chickenizeText(element) {
+        if(element.children.length === 0) {
+            element.textContent = element.textContent
+                .replace(/future/gi, '🐔 CHICKEN')
+                .replace(/build/gi, 'CLUCK')
+                .replace(/webengiai/gi, 'CHICKEN-GLAI')
+                .replace(/innovation/gi, 'EGG-NOVATION')
+                .replace(/technology/gi, 'POULTRY-TECH')
+                .replace(/sustainability/gi, 'SUSTAINABLE CLUCKING');
+        } else {
+            Array.from(element.children).forEach(chickenizeText);
+        }
+    }
+    
+    // Apply to entire page
+    chickenizeText(document.body);
+    
+    // Add extreme styling
+    document.body.style.cssText = `
+        background: linear-gradient(45deg, #ff0000, #ffff00, #00ff00) !important;
+        background-size: 400% 400% !important;
+        animation: rainbow 2s infinite !important;
+        font-family: "Comic Sans MS", cursive !important;
+        color: #8B4513 !important;
+        border: 20px solid #8B4513 !important;
+    `;
+    
+    // Add rainbow animation
+    const style = document.createElement('style');
+    style.innerHTML = `
+        @keyframes rainbow {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+        
+        * {
+            animation: shake 0.5s infinite !important;
+            transform-origin: center !important;
+        }
+        
+        @keyframes shake {
+            0% { transform: translateX(0) rotate(0deg); }
+            25% { transform: translateX(5px) rotate(1deg); }
+            50% { transform: translateX(-5px) rotate(-1deg); }
+            75% { transform: translateX(5px) rotate(1deg); }
+            100% { transform: translateX(0) rotate(0deg); }
+        }
+        
+        img {
+            filter: hue-rotate(90deg) !important;
+            border: 5px dotted red !important;
+        }
+    `;
+    document.head.appendChild(style);
+    
+    // Add floating chickens
+    for(let i = 0; i < 15; i++) {
+        const chicken = document.createElement('div');
+        chicken.innerHTML = '🐔';
+        chicken.style.cssText = `
+            position: fixed;
+            font-size: ${30 + i * 3}px;
+            z-index: 9999;
+            pointer-events: none;
+            animation: fly${i} ${5 + i}s infinite linear;
+            text-shadow: 2px 2px 4px black;
+        `;
+        document.body.appendChild(chicken);
+        
+        const flyStyle = document.createElement('style');
+        flyStyle.innerHTML = `
+            @keyframes fly${i} {
+                0% { 
+                    transform: translate(${Math.random() * 100}vw, ${Math.random() * 100}vh) rotate(0deg);
+                    opacity: 1;
+                }
+                50% { 
+                    transform: translate(${Math.random() * 100}vw, ${Math.random() * 100}vh) rotate(180deg);
+                    opacity: 0.7;
+                }
+                100% { 
+                    transform: translate(${Math.random() * 100}vw, ${Math.random() * 100}vh) rotate(360deg);
+                    opacity: 1;
+                }
+            }
+        `;
+        document.head.appendChild(flyStyle);
+    }
+    
+    // Auto-scroll madness
+    setInterval(() => {
+        window.scrollTo({
+            top: Math.random() * document.body.scrollHeight,
+            behavior: 'smooth'
+        });
+    }, 3000);
+    
+    // Title changer
+    let titleCount = 0;
+    setInterval(() => {
+        const titles = [
+            "🐔 CHICKEN POWER! 🐔",
+            "CLUCK CLUCK CLUCK!",
+            "POULTRY REVOLUTION!",
+            "EGG-CELLENT SITE!",
+            "BAWK BAWK!",
+            "CHICKEN TAKEOVER!"
+        ];
+        document.title = titles[titleCount % titles.length];
+        titleCount++;
+    }, 2000);
+    
+    // Play chicken sounds occasionally
+    setInterval(() => {
+        if(Math.random() > 0.7) {
+            const audio = new Audio('https://soundbible.com/mp3/Chicken Clucking-SoundBible.com-963196346.mp3');
+            audio.volume = 0.3;
+            audio.play().catch(() => {});
+        }
+    }, 10000);
+    
+    console.log("🐔 NUCLEAR CHICKEN MODE ACTIVATED! 🐔");
+})(); </script>
 
 </body>
+
 </html>
